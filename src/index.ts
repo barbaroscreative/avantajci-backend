@@ -33,11 +33,10 @@ app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 AppDataSource.initialize()
   .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Sunucu ${PORT} portunda çalışıyor.`);
-      console.log(`API URL: ${process.env.VERCEL_URL || `http://localhost:${PORT}`}`);
-    });
+    console.log("Database connected successfully.");
   })
   .catch((error) => {
-    console.error('Veritabanı bağlantı hatası:', error);
-  }); 
+    console.error('Database connection error:', error);
+  });
+
+export default app; 
