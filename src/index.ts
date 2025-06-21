@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { AppDataSource } from './data-source';
@@ -17,8 +17,24 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT || 5008;
+// Middleware to ensure database is connected before any request
+const connectDatabase = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    if (!AppDataSource.isInitialized) {
+      await AppDataSource.initialize();
+      console.log("Database connected successfully on-demand.");
+    }
+    next();
+  } catch (error) {
+    console.error('Database connection error in middleware:', error);
+    res.status(500).json({ message: 'Internal Server Error - Could not connect to database' });
+  }
+};
 
+// Use the middleware for ALL requests
+app.use(connectDatabase);
+
+// --- Routes ---
 app.get('/', (req, res) => {
   res.send('API Çalışıyor!');
 });
@@ -31,12 +47,5 @@ app.use('/api/upload', uploadRouter);
 app.use('/api/category', categoryRouter);
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-AppDataSource.initialize()
-  .then(() => {
-    console.log("Database connected successfully.");
-  })
-  .catch((error) => {
-    console.error('Database connection error:', error);
-  });
-
+// Vercel expects a default export of the app
 export default app; 
