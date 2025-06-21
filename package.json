@@ -8,7 +8,12 @@
     "dev": "ts-node-dev src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["kampanya", "banka", "avantaj", "react-native"],
+  "keywords": [
+    "kampanya",
+    "banka",
+    "avantaj",
+    "react-native"
+  ],
   "author": "Avantajcı Team",
   "license": "ISC",
   "description": "Avantajcı uygulaması için backend API",
