@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "avantajci-backend",
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
@@ -8,10 +8,10 @@
     "dev": "ts-node-dev src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["kampanya", "banka", "avantaj", "react-native"],
+  "author": "Avantajcı Team",
   "license": "ISC",
-  "description": "",
+  "description": "Avantajcı uygulaması için backend API",
   "dependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.3",
