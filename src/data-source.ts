@@ -15,7 +15,7 @@ const databasePath = process.env.VERCEL
 export const AppDataSource = new DataSource({
   type: 'sqlite',
   database: databasePath,
-  synchronize: true, // Geliştirme için otomatik tablo oluşturma
+  synchronize: true,
   logging: false,
   entities: [User, Store, Bank, Campaign, Category],
   migrations: [],
